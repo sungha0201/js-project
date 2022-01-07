@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practice</title>
+    <style>
+        .wrap {width:300px;height:300px;border: 1px solid #000;text-align: center;margin: auto;margin-top:30px;}
+        .wrap > div {display:flex;flex-direction: column;justify-content: center;height:100%;}
+        input {width:200px;margin: 0 auto;}
+        button {width:50px;}
+        p {display: inline-block;}
+        .textBox {border:1px solid #000;width:90%;height:50%;margin:0 auto;margin-top:10px;}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div>
+            <span> <p class="peopleNum">1</p>번째 참가자 입니다.</span>
+            <span>제시어 : <span class='text'></span></span>
+            <span>
+                <input>
+                <button>입력</button>
+            </span>
+            <p class="new">확인창</p>
+        </div>
+    </div>
+    
+    <script>
+        const num = Number( prompt("참가자수는 몇명입니까?") );
+        const $button = document.querySelector('button');
+        const $input = document.querySelector('input');
+        const $text = document.querySelector('.text');
+        const $peopleNum = document.querySelector('.peopleNum');
+        let text;
+        let newText;
+
+        function btnClick(){
+            if (!text || text[text.length-1] === newText[0]){ //제시어가 비어있거나 올바른지
+                text = newText;
+                $text.textContent = text;
+                const people = Number($peopleNum.textContent) ;
+                if (people+1 > num){
+                    $peopleNum.textContent = 1;
+                } else {
+                    $peopleNum.textContent = people +1;
+                }    
+                let newP = document.createElement('p');
+                let newText = document.createTextNode($input.value);
+                newP.appendChild(newText);
+                let currentP = document.getElementsByClassName('new');
+                document.body.insertBefore(newP,currentP);
+            } else { //제시어가 있고 올바르지 않으면
+                alert('올바르지 않은 단어입니다.');
+            }
+            $input.value = '';
+            $input.focus();
+        }
+
+        function inputText(e){
+            newText = e.target.value;
+        }
+
+        $button.addEventListener('click',btnClick);
+        $input.addEventListener('input',inputText);
+    </script>
+</body>
+</html>
