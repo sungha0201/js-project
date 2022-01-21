@@ -47,70 +47,63 @@
         let operator = '';
         let num2 = '';
 
+        const clickFn = (e)=> {
+            $result.value = '';
+            if (operator){
+                num2 += e.target.textContent;
+            } else {
+                num1 += e.target.textContent;
+            }
+            $result.value += e.target.textContent;             
+        }
+
+        const opClickFn = (op) => {
+            if (num1){
+                num2 += op.target.textContent;
+                $operator.value = op.target.textContent;
+            } else {
+                alert('숫자를 먼저 눌러주세요');
+            }
+            operator = op.target.textContent;
+        }
+
+        document.querySelector('#calculate').addEventListener('click',()=>{
+            if (num2){
+                switch(operator){
+                    case '+':
+                        $result.value = parseInt(num1) + parseInt(num2);
+                        break;
+                    case '-':
+                        $result.value = parseInt(num1) - parseInt(num2);
+                        break;
+                    case 'x':
+                        $result.value = parseInt(num1) * parseInt(num2);
+                        break;
+                    case '/':
+                        $result.value = parseInt(num1) / parseInt(num2);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
         document.querySelector('#num-0').addEventListener('click',clickFn);
         document.querySelector('#num-1').addEventListener('click',clickFn);
         document.querySelector('#num-2').addEventListener('click',clickFn);
-        document.querySelector('#num-3').addEventListener('click',clickFn);
+        document.querySelector('#num-3').addEventListener('bclick',clickFn);
         document.querySelector('#num-4').addEventListener('click',clickFn);
         document.querySelector('#num-5').addEventListener('click',clickFn);
         document.querySelector('#num-6').addEventListener('click',clickFn);
         document.querySelector('#num-7').addEventListener('click',clickFn);
         document.querySelector('#num-8').addEventListener('click',clickFn);
         document.querySelector('#num-9').addEventListener('click',clickFn);
-        document.querySelector('#plus').addEventListener('click',opClickFn);
+        
         document.querySelector('#plus').addEventListener('click',opClickFn);
         document.querySelector('#minus').addEventListener('click',opClickFn);
         document.querySelector('#divide').addEventListener('click',opClickFn);
         document.querySelector('#multiply').addEventListener('click',opClickFn);
 
-        document.querySelector('#calculate').addEventListener('click',()=>{
-            //=버튼을 누르면 -> num2가 있는지 확인 
-            //없다면 버튼을 요구한다.
-            //있다면=> 연산자가 무엇인지 확인 후 맞게 계산 -> 계산한 값은 result에 표시
-            if(num2){
-                switch(operator){
-                    case '+':
-                        $result.value = parseInt(num1) + parseInt(num2);                    
-                        break;
-                    case '-':
-                        $result.value = parseInt(num1) - parseInt(num2);
-                        break;
-                    case '/':
-                        $result.value = parseInt(num1) / parseInt(num2);
-                        break;
-                    case 'x':
-                        $result.value = parseInt(num1) * parseInt(num2);
-                        break;
-                    default: 
-                        break;
-                }
-            } else {
-                alert('숫자를 먼저 입력하세요');
-            }
-        });
-        
-        //숫자버튼 클릭시
-        function clickFn (event){
-            if (operator) { // 비어있지 않다
-                if (!num2) {
-                $result.value = '';
-                }
-                num2 += event.target.textContent;
-            }
-            else{ //비어있다   
-                num1 += event.target.textContent;
-            }
-            $result.value += event.target.textContent;
-        };
-        //연산자 버튼 클릭시
-        function opClickFn(e){
-            if (num1){ //num1이 있다면
-                operator = e.target.textContent; //변수 저장
-                $operator.value = e.target.textContent; //화면표시
-            } else {
-                alert('숫자를 먼저 입력해주세요!!');
-            }
-        }
+
     </script>
 </body>
 </html>
