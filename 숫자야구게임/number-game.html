@@ -18,16 +18,48 @@
         const $log = document.querySelector('#logs');
 
         const numbers = [];
-        for(let i=0;i < 9;i+=1){
-            numbers.push(i+1);
+        for (let n=0;n <9;n++){
+            numbers.push(n+1);
         }
         const answer = [];
-        for(let n=0;n<4;n+=1){//4번반복
-            const index = Math.floor( Math.random()*(9-n) );
+        for(let n=0;n<4;n++){
+            const index = Math.floor( Math.random()*(numbers.length-n) );
             answer.push(numbers[index]);
-            numbers.slice(index,1);
+            numbers.splice(index,1);
         }
-        console.log(answer);
+        const tries = [];
+        function checkInput(input){
+            if (input.length != 4){
+                return alert('4자리 숫자를 입력하세요');
+            }
+            if(new Set(input).size !=4){ //중복되는 값을 없앤후 4자리인가?
+                return alert("중복되지 않게 입력하세요");
+            }
+            if(tries.includes(input)){
+                return alert('이미 시도한 값입니다.');
+            }
+            tries.push(input);
+            return true;
+        }
+        $form.addEventListener('submit',(e)=>{
+            e.preventDefault();
+            const value = $input.value;
+            $input.value = '';
+            if (checkInput(value)){ //입력값 에러 x
+                if(answer.join('') === value){
+                    $logs.textContent = '홈런!';
+                    return;
+                }
+                if (tries.length >= 9){
+                    const messsage = document.createTextNode(`패배!정답은${answer.join('')}`);
+                    $logs.appendChild(messsage);
+                    return;
+                }
+            }else { 
+                //에러 o
+            }
+            
+        });
     </script>
 </body>
 </html>
