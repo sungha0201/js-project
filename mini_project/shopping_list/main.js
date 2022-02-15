@@ -6,7 +6,10 @@ const $addBtn = document.querySelector('.footer__button');
 $addBtn.addEventListener('click',()=>{
     onAdd();
 });
-$input.addEventListener('keypress',(e)=>{
+$input.addEventListener('keydown',(e)=>{
+    if(e.isComposing){
+        return;
+    }
     if(e.key === 'Enter'){
         onAdd();
     }

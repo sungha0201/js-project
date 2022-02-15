@@ -13,50 +13,10 @@
     </form>
     <div id="logs"></div>
     <script>
-        const $form = document.querySelector('#form');
-        const $input = document.querySelector('#input');
-        const $logs = document.querySelector('#logs');
-
-        const number = [];
-        for(let n=0;n<9;n++){
-            number.push(n+1);
-        }
-
         const random_num = [];
-        for(let n=0;n<4;n++){
-            const index = Math.floor(Math.random()*(number.length-n));
-            random_num.push(number[index]);
-            number.splice(index,1);
+        for(let n=0;n<9;n++){
+            console.log(n);
         }
-
-        const tries = [];
-        function checkInput(input){
-            if(input.length != 4){
-                alert("4자리 숫자를 입력해주세요");
-            }
-            if(new Set(input).size !=4){
-                alert("중복되지 않게 입력하세요");
-            }
-            if(tries.includes(input)){
-                alert("이미 시도한 값입니다.");
-            }
-            tries.push(input);
-            return true;
-        }
-
-        $form.addEventListener('submit',(e)=>{
-            e.preventDefault();
-            const value = $input.value;
-            $input.value = '';
-            if(checkInput(value)){ //에러가 없다면
-                if(value === random_num.join('')){
-                    $log.textcontent = '홈런입니다!!';
-                    return;
-                }
-            }else { //에러가 있다면?
-
-            }
-        });
     </script>
 </body>
 </html>
