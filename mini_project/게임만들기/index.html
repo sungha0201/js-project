@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fun game</title>
+    <link rel="stylesheet" href="style.css">
+    <!--defer:  페이지가 모두 로드된 후에 해당 외부 스크립트가 실행됨을 명시,넣지 않으면 html이 실행되기전에 실행되버림 -->
+    <script src="main.js" defer></script>
+    <script src="https://kit.fontawesome.com/09f61888e2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <section class="game">
+        <header class="game__header">
+            <button class="game__button"><i class="fas fa-play"></i></button>
+            <span class="game__timer">0:0</span>
+            <span class="game__score">9</span>
+        </header>
+        <section class="game__field"></section>
+    </section>
+    <section class="pop-up pop-up--hide">
+        <button class="pop-up__refresh"><i class="fas fa-sync-alt"></i></button>
+        <span class="pop-up__message"></span>
+    </section>
+</body>
+</html>
